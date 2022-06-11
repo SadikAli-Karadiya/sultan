@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script defer src="https://unpkg.com/alpinejs@3.10.2/dist/cdn.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+        integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="deskbord2.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* deshboard card */
+        .card-content .revenue:hover {
+
+            box-shadow: 4px 4px 4px darkgoldenrod;
+
+
+        }
+
+        .card-single:hover {
+            transform: translate(0, -8px);
+        }
+
+        /* for profile */
+
+        .link a:hover {
+            color: rgb(2, 2, 71);
+        }
+
+        .drop-item .dropdown-toggle {
+            transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+
+        }
+
+        .drop-content {
+            box-shadow: 2px 2px 2px darkorange;
+            transform: translateY(50px);
+            opacity: 0;
+            visibility: hidden;
+            transition: .3s;
+        }
+
+
+        .drop-item .drop-content::before {
+
+            position: absolute;
+            left: 86%;
+            top: -7px;
+            background-color: rgb(2, 2, 71);
+            width: 14px;
+            height: 14px;
+            transform: translate(50%) rotate(45deg);
+        }
+
+        /* for Notification */
+
+      
+
+        .notification-content {
+            box-shadow: 2px 2px 2px darkorange;
+              display: none;
+          
+            transition: .2s;
+        }
+
+
+        .social-icon .notification-content::before {
+
+            position: absolute;
+            left: 87%;
+            top: -7px;
+            background-color: rgb(2, 2, 71);
+            width: 14px;
+            height: 14px;
+            transform: translate(50%) rotate(45deg);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+        /* for sidebar */
+
+        #sidebar-toggle:checked~.main-content {
+            margin-left: 60px;
+        }
+
+
+
+
+        #sidebar-toggle:checked~.main {
+            width: auto;
+        }
+
+        #sidebar-toggle:checked~.main-content .card-body {
+
+            width: 100%;
+        }
+
+
+
+
+        #sidebar-toggle:checked~.main-content header {
+            padding-left: 175px;
+            width: 100%;
+        }
+
+        header {
+            transition: 500ms;
+        }
+
+
+
+        .main-content {
+            transition: margin-left 500ms;
+
+        }
+
+
+
+        .sidebar {
+            transition: width 500ms;
+        }
+
+        /* #sidebar-toggle {
+            display: none;
+        }
+
+        /* #sidebar-toggle:checked~ main .card-single {
+            height: 100%;
+        } */
+
+       
+
+        #sidebar-toggle:checked~.sidebar {
+            width: 220px;
+        }
+
+        #sidebar-toggle:checked~.sidebar .sidebar-header img {
+            display: none;
+        }
+
+
+        #sidebar-toggle:checked~.sidebar .sidebar-header .brand span {
+            position: relative;
+        }
+
+
+
+        #sidebar-toggle:checked~.sidebar .sidebar-menu ul li a {
+
+
+            justify-content: left;
+            margin-left: 20px;
+        }
+
+        #sidebar-toggle:checked~.sidebar .sidebar-header {
+            justify-content: left;
+            margin-left: 10px;
+            margin-top: 1rem;
+        }
+
+        #sidebar-toggle:checked~.main-content main .card-single {
+            display: flex;
+        } */
+
+        .sidebar .sidebar-header p,
+        .sidebar li span:last-child {
+            display: none;
+        }
+
+        #sidebar-toggle:checked~.sidebar .sidebar-header p,
+        #sidebar-toggle:checked~.sidebar li span:last-child {
+            display: block;
+        }
+
+
+        #sidebar-toggle:checked~.sidebar .sidebar-header h2 span,
+        #sidebar-toggle:checked~.sidebar li a:last-child {
+            margin-left: 0;
+        }
+
+        #sidebar-toggle:checked~.sidebar .sidebar-header,
+        #sidebar-toggle:checked~.sidebar li {
+            display: flex;
+
+
+
+        }
+
+        #sidebar-toggle:checked~.card-body i h5 h4 a {
+            padding-left: 5rem;
+        }
+
+        .b-btn:hover {
+            background: rgb(2, 2, 71);
+            color: darkorange;
+        }
+
+        .b-btn:hover {
+            background: rgb(2, 2, 71);
+            color: darkorange;
+        }
+
+        /* form 1 for */
+        .f1-btn {
+            background: rgb(2, 2, 71);
+            color: darkorange;
+        }
+
+        .f1-btn:hover {
+            background: darkorange;
+            color: rgb(2, 2, 71);
+        }
+
+        .submit-btn input {
+            background: darkorange;
+            color: rgb(2, 2, 71);
+        }
+
+        .submit-btn input:hover {
+            background: rgb(2, 2, 71);
+            color: darkorange;
+        }
+
+        .box .file input:hover {
+            border: 2px solid rgb(2, 2, 71);
+        }
+
+        .box input:focus {
+            border: 2px solid rgb(2, 2, 71);
+        }
+
+        .box .company:focus {
+            border: 2px solid rgb(2, 2, 71);
+
+        }
+
+        .error {
+            font-weight: 700;
+            display: block;
+            color: #f00;
+            font-size: 12px;
+            text-align: left;
+            padding-left: 1rem;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body >
+    <input type="checkbox" id="sidebar-toggle" class=" " >
+    <div style="background:rgb(2, 2, 71); z-index: 1000;"
+        class="sidebar text-white  h-[100%] w-[70px] fixed left-0 top-0 z-50   || xl:h-[100%] xl:w-[80px] xl:fixed xl:left-0 xl:top-0    xl:overflow-y-auto ">
+        <div class="sidebar-header">
+            <div class="logo  items-center  text-center space-x-0">
+                <a href="deskbord2.html">
+                    <img style="background: rgb(2,2,71) ;" src="logo.png" alt="" id="logo-img"
+                        class="w-[45px] h-[45px] cursor-pointer rounded-full border-amber-500 border-2 mt-[1.5rem] mb-[1rem] ml-[.7rem]   ">
+
+                </a>
+                <!-- <p class=" logo-name text-xl font-bold text-amber-500 " hidden>SULTAN MOBILE</p> -->
+            </div>
+        </div>
+
+
+        <div style="transition: 500ms;" class="sidebar-menu  ">
+            <ul>
+                <li
+                    class=" mb-[1rem]  py-2 || xl:mb-[1rem] items-center  xl:py-2 hover:border-l-4 hover:border-l-amber-500 ">
+                    <a href="deskbord2.html"
+                        class="ml-5 text-lg font-semibold hover:font-semibold flex  items-center space-x-2 hover:text-amber-500">
+                        <i class="fa-solid fa-home  text-2xl pr-[.5rem] hover:font-semibold || xl:pr-[.6rem]"></i>
+                        <span id="span" hidden > Dashboard</span>
+                    </a>
+                </li>
+
+
+                <li
+                    class=" mb-[1rem] items-center py-2 || xl:mb-[1rem]  xl:py-2 hover:border-l-4 hover:border-l-amber-500 ">
+                    <a href="allcustomer.html"
+                        class="ml-5 text-lg font-semibold flex items-center  space-x-2 hover:text-amber-500">
+                        <i class="fa-solid fa-users  text-2xl  pr-[.5rem] || ||xl:pr-[.6rem]"></i>
+                        <span id="span" hidden>Customers</span>
+                    </a>
+                </li>
+
+                <li
+                    class=" mb-[1rem] items-center py-2 || xl:mb-[1rem]  xl:py-2 hover:border-l-4 hover:border-l-amber-500 ">
+                    <a href="" class="ml-5 text-lg font-semibold flex items-center  space-x-2 hover:text-amber-500">
+                        <i class="fa-solid fa-history  text-2xl  pr-[.5rem] || ||xl:pr-[.6rem]"></i>
+                        <span id="span"hidden >History</span>
+                    </a>
+                </li>
+
+                <li
+                    class=" mb-[1rem] items-center py-2 || xl:mb-[1rem]  xl:py-2 hover:border-l-4 hover:border-l-amber-500 ">
+                    <a href="about.html"
+                        class="ml-5 text-lg font-semibold flex items-center space-x-2 hover:text-amber-500 ">
+                        <i class="fa-solid fa-user  text-2xl  pr-[.5rem] || ||xl:pr-[.6rem]"></i>
+                        <span id="span" hidden >About</span>
+                    </a>
+                </li>
+
+                <li
+                    class=" mb-[1rem] items-center py-2 || xl:mb-[1rem]  xl:py-2 hover:border-l-4 hover:border-l-amber-500 ">
+                    <a href="contect.html"
+                        class="ml-5 text-lg font-semibold flex items-center  space-x-2 hover:text-amber-500 ">
+                        <i class="fa-solid fa-phone  text-2xl pr-[.5rem] || || xl:pr-[.6rem]"></i>
+                        <span id="span" hidden >Contact</span>
+                    </a>
+                </li>
+
+                <li
+                    class=" mb-[1rem] items-center py-2 || xl:mb-[1rem]  xl:py-2 hover:border-l-4 hover:border-l-amber-500 ">
+                    <a href="" class="ml-5 text-lg font-semibold flex items-center space-x-2 hover:text-amber-500">
+                        <i class="fa-brands fa-whatsapp  text-3xl pr-[.5rem] || || xl:pr-[.6rem]"></i>
+                        <span id="span"hidden >Whatsapp</span>
+                    </a>
+                </li>
+
+                <li
+                    class=" mb-[1rem] items-center py-2 || xl:mb-[1rem]  xl:py-2 hover:border-l-4 hover:border-l-amber-500 ">
+                    <a href="form1.html"
+                        class="ml-5 text-lg font-semibold flex items-center space-x-2 hover:text-amber-500 ">
+                        <i class="fa-solid fa-plus  h text-4xl pr-[.5rem] || || xl:pr-[.6rem]"></i>
+                        <span  id="span"hidden >Add Customer</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+     <div class="main-content ml-[70px] ||  xl:ml-[70px] xl:mt-0 xl:pt-0 ">
+        <header id="main-header"
+            class="main-header  top-0 z-50  absolute bg-white h-[60px] flex items-center justify-between pr-[.5rem] pl-[.5rem] left-[70px] border border-b-2 border-b-black w-[81.5%] || md:left-[190px]  md:w-[77%]
+            ||  xl:z-50 xl:absolute xl:top-0 xl:w-[100%]  xl:bg-white xl:h-[60px] xl:flex xl:items-center  xl:pr-[1rem] xl:pl-[3rem] xl:left-0 xl:border xl:border-b-2 xl:border-b-black">
+             <div class="left-header flex space-x-6 pl-[.1rem] ">
+                <label for="toggle" class="ti-menu-alt cursor-pointer   ">
+                    <i class="fa-solid fa-bars  text-2xl ml-0 xl:ml-0 hover:text-amber-500  xl:hidden" id="burgger"></i>
+                </label>
+
+
+                <div class="search-wrapper flex items-center || xl:flex xl:pl-[1rem] ">
+                    <i class="fa-solid fa-search"></i>
+                    <input type="search"
+                        class="boder-none outline-none pl-[.5rem] h-[30px] w-[120px] || xl:pl-[1rem] xl:h-[38px] xl:w-[200px]"
+                        name="search" id="search" placeholder="Search">
+
+                </div>
+            </div>
+
+            <div class="right-header">
+
+                <div class="right-content flex items-center space-x-2  || md:mr-0 || xl:space-x-5 xl:mr-0  ">
+                    <div class="social-icon">
+                        <div class="notificaion" >
+                            <i class="fa-solid fa-bell cursor-pointer text-xl  "></i>
+
+                        </div>
+
+                        <div style="background: rgb(2,2,71);"
+                            class="notification-content  rounded-sm absolute  top-[45px]  right-[3.5rem] pt-[10px] pb-[10px] pl-[15px] pr-[15px]  mt-[20px]  || xl:pt-[10px] xl:pb-[10px] xl:pl-[15px] xl:pr-[15px]  xl:mt-[20px] xl:top-[32px] xl:right-[6.4rem] before:bg-gray-500 before:absolute before:left-[40%] before:top-[-6px]  before:w-[12px] ">
+                            <div class="NAME font-bold text-white mb-3 mt-3">
+                                <P>RAJPUT MOHAMMADSHAD</P>
+                            </div>
+
+
+                            <ul class="link  ">
+                                <li class="h-[30px] pt-1  py-2  hover:bg-white hover:rounded-md  ">
+                                    <a href="#" class="text-white   ml-5 font-semibold  py-1 "><i
+                                            class="fa-solid fa-user  inline-block  w-[20px] mr-[5px]">
+                                        </i> My Profile</a>
+                                </li>
+                                <li class="h-[30px] pt-1  py-2  hover:bg-white hover:rounded-md  "><a href="#"
+                                        class="text-white   ml-5 font-semibold  py-1 "><i
+                                            class="fa-solid fa-pen-to-square inline-block  w-[20px] mr-[5px]"></i>Edit
+                                        Profile</a></li>
+                                <div class="drivider mt-[10px] mb-[10px] border-b-2 border-b-white"></div>
+                                <li class="h-[30px] pt-1  py-2  hover:bg-white hover:rounded-md  "><a href="fpass.html"
+                                        class="text-white   ml-5 font-semibold  py-1 "> <i
+                                            class="fa-solid fa-lock inline-block  w-[20px] mr-[5px]"></i>Change
+                                        Password</a>
+                                </li>
+                                <li class="h-[30px] pt-1  py-2  hover:bg-white hover:rounded-md  "><a href="#"
+                                        class="text-white   ml-5 font-semibold  py-1 "> <i
+                                            class="fa-solid fa-user-gear inline-block  w-[20px] mr-[5px]"></i>Settings</a>
+                                </li>
+                                <div class="drivider mt-[10px] mb-[10px] border-b-2 border-b-white"></div>
+
+                                <li class="h-[30px] pt-1  py-2  hover:bg-white hover:rounded-md  "><a href="login.html"
+                                        class="text-white   ml-5 font-semibold  py-1 "><i
+                                            class="fa-solid fa-right-from-bracket inline-block  w-[20px] mr-[5px]"></i>Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="drop-item xl:flex xl:justify-center xl:items-center xl:flex-col ">
+                        <div class="img flex items-center  rounded-md space-x-1 cursor-pointer"
+                            onclick="MyFunction()">
+                            <img src="shad.png" alt=""
+                                class=" cursor-pointer border-0 border-black w-[50px] h-[50px] object-cover rounded-full || md:w-[40px] md:h-[40px] md:object-cover md:rounded-full  || xl:w-[50px] xl:h-[50px] xl:object-cover xl:rounded-full">
+                            <i class="fa-solid fa-angle-down text-gray-500 text-lg pt-4 pr-1"></i>
+                        </div>
+
+                        <div style="background-color: rgb(2,2,71);"
+                            class="drop-content rounded-sm    absolute  top-[45px]  right-[3.5rem] pt-[10px] pb-[10px] pl-[15px] pr-[15px]  mt-[20px]  || xl:pt-[10px] xl:pb-[10px] xl:pl-[15px] xl:pr-[15px]  xl:mt-[20px] xl:top-[40px] xl:right-[.5rem] before:bg-gray-500 before:absolute before:left-[4%] before:top-[-6px]  before:w-[12px] ">
+                            <div class="NAME font-bold text-white mb-3 mt-3">
+                                <P>RAJPUT MOHAMMADSHAD</P>
+                            </div>
+
+
+                            <ul class="link  ">
+                                <li class="h-[30px] pt-1  py-2  hover:bg-white hover:rounded-md  ">
+                                    <a href="#" class="text-white   ml-5 font-semibold  py-1 "><i
+                                            class="fa-solid fa-user  inline-block  w-[20px] mr-[5px]">
+                                        </i> My Profile</a>
+                                </li>
+                                <li class="h-[30px] pt-1  py-2  hover:bg-white hover:rounded-md  "><a href="#"
+                                        class="text-white   ml-5 font-semibold  py-1 "><i
+                                            class="fa-solid fa-pen-to-square inline-block  w-[20px] mr-[5px]"></i>Edit
+                                        Profile</a></li>
+                                <div class="drivider mt-[10px] mb-[10px] border-b-2 border-b-white"></div>
+                                <li class="h-[30px] pt-1  py-2  hover:bg-white hover:rounded-md  "><a href="fpass.html"
+                                        class="text-white   ml-5 font-semibold  py-1 "> <i
+                                            class="fa-solid fa-lock inline-block  w-[20px] mr-[5px]"></i>Change
+                                        Password</a>
+                                </li>
+                                <li class="h-[30px] pt-1  py-2  hover:bg-white hover:rounded-md  "><a href="#"
+                                        class="text-white   ml-5 font-semibold  py-1 "> <i
+                                            class="fa-solid fa-user-gear inline-block  w-[20px] mr-[5px]"></i>Settings</a>
+                                </li>
+                                <div class="drivider mt-[10px] mb-[10px] border-b-2 border-b-white"></div>
+
+                                <li class="h-[30px] pt-1  py-2  hover:bg-white hover:rounded-md  "><a href="login.html"
+                                        class="text-white   ml-5 font-semibold  py-1 "><i
+                                            class="fa-solid fa-right-from-bracket inline-block  w-[20px] mr-[5px]"></i>Logout</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <main class=" mt-[60px] pr-0 p-0  || xl:mt-[30px] xl:min-h-[90vh] xl:p-[1rem] xl:pl-[2rem] xl:pr-[2rem] ">
+        
+
+                <h2 style="color:rgb(2, 2, 71);"
+                    class="deskbord-tital text-center text-4xl font-bold mb-[1rem] || xl:text-left xl:mb-[1rem]">Overview
+                </h2>
+    
+                <div class="deskbord-cards space-y-10 ml-[1rem] || xl:flex xl:space-y-0  xl:gap-[3rem] ">
+                    <a href="pending.html">
+    
+                        <div style="box-shadow:3px 3px 3px rgba(0,0,0,3)  ; transition: 0.6s; background:rgb(2, 2, 71);"
+                            class="card-single  rounded-sm cursor-pointer text-center w-[90%]  pb-[1rem] || xl:text-center  xl:w-[30%]  ">
+                            <div
+                                class="card-body  pt-[1.3rem]  xl:pt-[1.3rem] pb-[1rem]  text-center   xl:pl-[1rem] xl:h-[20%]">
+                                <i class="fa-solid fa-arrows-rotate   text-5xl pb-1 pr-[1.2rem] text-amber-500 "></i>
+                                <div class="card-content">
+                                    <h5 class=" text-gray-500 font-semibold text-xl ">Total Pending Amount</h5>
+                                    <h4 class=" text-lg mt-[.2rem] mb-[1rem] text-white font-semibold xl:text-3xl ">
+                                        $40,00,000
+                                    </h4>
+                                    <a href="pending.html"
+                                        class=" revenue text-amber-500 hover:text-amber-500 hover:bg-white  font-bold rounded-full  px-4 py-1    text-2xl ">View
+                                        all</a>
+                                </div>
+                            </div>
+    
+    
+    
+                        </div>
+                    </a>
+                    <a href="paidup.html">
+                        <div style="box-shadow:3px 3px 3px rgba(0,0,0,3)  ; transition: 0.6s; background:rgb(2, 2, 71);"
+                            class="card-single   rounded-sm cursor-pointer text-center w-[90%]  pb-[1rem] || xl:text-center  xl:w-[30%]  ">
+                            <div
+                                class="card-body  pt-[1.3rem]  xl:pt-[1.3rem] pb-[1rem]  text-center   xl:pl-[1rem] xl:h-[20%]">
+                                <i class="fa-solid fa-circle-check   text-5xl pb-1 pr-[1.2rem] text-amber-500 "></i>
+                                <div class="card-content">
+                                    <h5 class=" text-gray-500 font-semibold text-xl ">Total Paidup Amount</h5>
+                                    <h4 class=" text-lg mt-[.2rem] mb-[1rem] text-white font-semibold xl:text-3xl ">
+                                        $40,00,000
+                                    </h4>
+                                    <a href="#"
+                                        class=" revenue text-amber-500 hover:text-amber-500 hover:bg-white  font-bold rounded-full  px-4 py-1    text-2xl ">View
+                                        all</a>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </a>
+                    <a href="revanue.html">
+                        <div style="box-shadow:3px 3px 3px rgba(0,0,0,3)  ; transition: 0.6s; background:rgb(2, 2, 71);"
+                            class="card-single   rounded-sm cursor-pointer text-center w-[90%]  pb-[1rem] || xl:text-center  xl:w-[30%]  ">
+                            <div
+                                class="card-body  pt-[1.3rem]  xl:pt-[1.3rem] pb-[1rem]  text-center   xl:pl-[1rem] xl:h-[20%]">
+                                <i class="fa-solid fa-hand-holding-dollar   text-5xl pb-1 pr-[1.2rem] text-amber-500 "></i>
+                                <div class="card-content">
+                                    <h5 class=" text-gray-500 font-semibold text-xl ">Total Revenue</h5>
+                                    <h4 class=" text-lg mt-[.2rem] mb-[1rem] text-white font-semibold xl:text-3xl ">
+                                        $40,00,000
+                                    </h4>
+                                    <a href="#"
+                                        class=" revenue text-amber-500 hover:text-amber-500 hover:bg-white  font-bold rounded-full  px-4 py-1    text-2xl ">View
+                                        all</a>
+                                </div>
+                            </div>
+    
+                        </div>
+                    </a>
+                </div>
+    
+    
+                <section
+                    class="recent block  mt-[0rem] ml-[1rem] mr-[1rem] || xl:flex xl:mt-[3rem] xl:mb-[3rem] xl:ml-0 xl:mr-0 xl:w-[100%]">
+    
+                    <div class="activity-grid xl:grid xl:grid-cols-2  ">
+    
+                        <div class=" activity-card w-[100%] mt-[1rem]  xl:w-[160%] h-[800px] overflow-y-scroll ">
+    
+                            <table class="w-[1600px] text-left overflow-scroll   border-collapse">
+                                <thead style="color: rgb(2, 2, 71);" class="bg-slate-100 text-center text-lg p-[10px]">
+                                    <tr class="overflow-y-scroll border-r ">
+                                        <th class="w-[200px] h-[50px]">S.NO</th>
+                                        <th class="w-[200px] h-[50px]">INVOICE NO</th>
+                                        <th class="w-[200px] h-[50px]">START DATE</th>
+                                        <th class="w-[200px] h-[50px]">END DATE</th>
+                                        <th class="w-[200px] h-[50px]">PHOTO</th>
+                                        <th class="w-[200px] h-[50px]">FULL NAME</th>
+                                        <th class="w-[200px] h-[50px]">PHONE</th>
+                                        <th class="w-[200px] h-[50px]">MODAL NAME</th>
+                                        <th class="w-[200px] h-[50px]">PHONE PRICE</th>
+                                        <th class="w-[200px] h-[50px]">FINAL PRICE</th>
+                                        <th class="w-[200px] h-[50px]">PAIDUP</th>
+                                        <th class="w-[200px] h-[50px]">PENDING</th>
+                                        <th class="w-[200px] h-[50px]">STATUS</th>
+                                        <th class="w-[200px] h-[50px]">UPDATE</th>
+                                        <th class="w-[200px] h-[50px]">ADD NEW</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody class="text-center">
+                                    <tr class="  border-b border-black font-semibold">
+                                        <td class="w-[200PX] h-[40px] text-center">1</td>
+                                        <td class="w-[200PX] h-[40px] text-center">1</td>
+    
+                                        <td class="w-[200PX] h-[40px] text-center">01-01-2022</td>
+                                        <td class="w-[200PX] h-[40px] text-center">01-01-2022</td>
+                                        <td class="w-[0px] h-[40px] pl-10 ">
+                                            <a href="showall.html" class="">
+                                                <img src="shad.png" alt="" class="w-[45px] h-[45px] rounded-full  ">
+                                            </a>
+                                        </td>
+                                        <td class="w-[200PX] h-[40px] text-center">RAJPUT MOHAMMADSHAD</td>
+                                        <td class="w-[200PX] h-[40px] text-center">1234567890</td>
+                                        <td class="w-[200PX] h-[40px] text-center">APPLE 13PRO</td>
+                                        <td class="w-[200PX] h-[40px] text-center">140000</td>
+                                        <td class="w-[200PX] h-[40px] text-center">145000</td>
+                                        <td class="w-[200PX] h-[40px] text-center">100000</td>
+                                        <td class="w-[200PX] h-[40px] text-center">45000</td>
+                                        <td class="w-[200PX] h-[40px] text-center">
+                                            <div>
+                                                <h3 class=" text-red-500  font-bold py-1  rounded-md">PENDING</h3>
+    
+                                            </div>
+                                        </td>
+                                        <td class="w-[200PX] h-[40px] text-center">
+                                            <button class="transform transition-all hover:scale-125">
+                                                <a href="#" class=" ">
+                                                    <i class="fa-solid fa-pen-to-square text-xl text-amber-500"></i>
+                                                </a>
+    
+                                            </button>
+                                        </td>
+                                        <td class="w-[200PX] h-[40px] text-center">
+                                            <button class="transform transition-all hover:scale-125">
+                                                <a href="addnew.html" class=" ">
+                                                    <i class="fa-solid fa-plus text-2xl text-green-500"></i>
+                                                </a>
+    
+                                            </button>
+                                        </td>
+                                    </tr>
+    
+    
+    
+    
+                                </tbody>
+                            </table>
+                        </div>
+    
+                        <div class="summary mt-6 xl:mt-4 xl:ml-[27rem] xl:w-[40%] xl:p-5  ">
+                            <div
+                                class="summary-card border-2 border-amber-500  rounded-md mb-[1.5rem] xl:pt-[1rem] xl:pb-[1rem] bg-white  ">
+                                <div class="summary-single cursor-pointer  items-center justify-center text-center py-3  ">
+                                    <a href="">
+                                        <i class="fa-solid fa-users text-5xl text-amber-500 "></i>
+                                        <div>
+                                            <h5 style="color:rgb(2,2,71) ;" class="text-center text-5xl font-semibold">100
+                                            </h5>
+                                            <small class=" font-bold text-sm text-gray-500 ">Total Customers</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <hr class="  xl:ml-5 xl:mr-5 border-amber-500 border">
+                                <div class="summary-single cursor-pointer  items-center justify-center text-center py-3  ">
+                                    <a href="">
+                                        <i class="fa-solid fa-calendar-check text-5xl text-amber-500"></i>
+                                        <div>
+                                            <h5 style="color:rgb(2,2,71) ;" class="text-center text-5xl font-semibold">100
+                                            </h5>
+                                            <small class=" font-bold text-sm text-gray-500 ">Total Sell In Week</small>
+                                        </div>
+                                    </a>
+                                </div>
+                                <hr class="  xl:ml-5 xl:mr-5 bg-amber-500 h-[2px]">
+                                <div class="summary-single cursor-pointer  items-center justify-center text-center py-3  ">
+                                    <a href="">
+                                        <i class="fa-solid fa-calendar-check text-5xl text-amber-500"></i>
+                                        <div>
+                                            <h5 style="color:rgb(2,2,71) ;" class="text-center text-5xl font-semibold">100
+                                            </h5>
+                                            <small class=" font-bold text-sm text-gray-500 ">Total Sell In Month</small>
+                                        </div>
+                                    </a>
+                                </div>
+    
+                            </div>
+                            <div
+                                class="birth-card p-[.5rem] border-2 border-amber-500  xl:items-center rounded-md  items-center text-center justify-center  ">
+    
+                                <div class="bday-info xl:ml-0 items-center text-center justify-center content-center">
+    
+                                    <a href="" class="">
+    
+                                        <img style="border: 3px solid transparent ;" src="shad.png" alt=""
+                                            class="rounded-full ml-16 w-[100px] h-[100px]  xl:ml-16 ">
+    
+                                    </a>
+    
+                                    <h5 style="color: rgb(2,2,71)" class=" font-bold text-lg xl:text-base  ">RAJPUT
+                                        MOHAMMADSHAD</h5>
+                                    <small class="font-semibold text-sm text-gray-500">BIRTHDAY TODAY</small>
+                                    <div class="button py-2">
+                                        <button class=" b-btn bg-amber-500  rounded-md font-bold px-4 py-2  ">
+                                            <i class="fa-solid fa-gift"></i>
+                                            Wish him
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+    
+    
+    
+                </section>
+            
+        </main>
+    </div> --> -->
+
+    <script>
+        // var btn_hambug = document.getElementById('btn_hamburg');
+
+        function showmenu() {
+            $('#menu').css({ "left": "0", "width": "270px" });
+        }
+        $('document').ready(function () {
+
+            $('#close-btn').click(function () {
+                $('#menu').css("left", "-272px");
+            })
+           
+
+            //   Notification
+
+            // $(".social-icon .notificaion").click(function(){
+            //     $(this).parent().toggleClass("active");
+            // });
+
+            $(".social-icon .notificaion").mouseleave(function(){
+                ($(".notification-content").css("display","none"))
+            });
+
+            $(".social-icon .notificaion").mouseenter(function(){
+                ($(".notification-content").css("display","block"))
+            });
+
+            // sidebar menu
+
+            $(".sidebar").mouseenter(function(){
+                // alert("success!!!")
+                $(".sidebar",).css("width","220px","padding-top","");
+                $(" .logo p ").css("display","block");
+                $(".sidebar #span  ").css("display","flex");
+                $(".sidebar .logo ").css("margin",".5rem",);
+            })
+
+            $(".sidebar").mouseleave(function(){
+                // alert("success!!!")
+                $(".sidebar").css("width","80px");
+                $(".sidebar .logo-name  ").css("display","none");
+                $(".sidebar  #span  ").css("display","none");
+                $(".sidebar #logo-img  ").css("display","block");
+                $(".sidebar .logo ").css("margin","0rem");
+
+
+                
+
+                
+            })
+
+           
+
+
+
+        });
+
+        function MyFunction() {
+            var dropcontent = document.querySelector('.drop-content');
+            dropcontent.classList.toggle('dropdown-toggle');
+
+        }
+
+       
+    </script>
+</body>
+
+</html>
